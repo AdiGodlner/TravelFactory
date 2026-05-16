@@ -1,36 +1,57 @@
 import type { Response } from "express";
 import type { AuthenticatedRequest } from "../middleware/authMiddleware.js";
+import { vacationService } from "../services/vacationService.js";
+import { VacationStatus } from "../entities/vacationRequest.js";
+import { assertString } from "../utils/utils.js";
 
 export const vacationController = {
-	getAllVacations(req: AuthenticatedRequest, res: Response) {
-		res.json({
-			message: `All vacations `,
-		});
+	async getAllVacations(req: AuthenticatedRequest, res: Response) {
+		const data = await vacationService.getAll();
+		res.json(data);
 	},
 
-	getUserVacations(req: AuthenticatedRequest, res: Response) {
-		console.log(" in get users vacations");
-
-		res.json({
-			message: `All vacations for user ${req.user?.id}`,
-		});
+	async getUserVacations(req: AuthenticatedRequest, res: Response) {
+		const uid = req.user!.id;
+		const data = await vacationService.getByUserId(uid);
+		res.json(data);
 	},
 
-	create(req: AuthenticatedRequest, res: Response) {
-		res.json({
-			message: `Vacation created by user ${req.user?.id}`,
-		});
+	async create(req: AuthenticatedRequest, res: Response) {
+		const uid = req.user!.id;
+		const { startDate, endDate, reason } = req.body;
+
+		const result = await vacationService.create(
+			uid,
+			startDate,
+			endDate,
+			reason,
+		);
+
+		res.status(201).json(result);
 	},
 
-	setVacationStatus(req: AuthenticatedRequest, res: Response) {
-		res.json({
-			message: `Vacation ${req.params.id} updated`,
-		});
+	async setVacationStatus(req: AuthenticatedRequest, res: Response) {
+		const { id } = req.params;
+
+		assertString(id, "Missing or invalid vacation id");
+		const { status, comments: rawComments } = req.body;
+		const comments = typeof rawComments === "string" ? rawComments : undefined;
+		const result = await vacationService.setStatus(
+			id,
+			status as VacationStatus,
+			comments,
+		);
+
+		res.json(result);
 	},
 
-	delete(req: AuthenticatedRequest, res: Response) {
-		res.json({
-			message: `Vacation ${req.params.id} deleted`,
-		});
+	async delete(req: AuthenticatedRequest, res: Response) {
+		const uid = req.user!.id;
+		const { id } = req.params;
+		assertString(id, "Missing or invalid vacation id");
+
+		const result = await vacationService.delete(id, uid);
+
+		res.json(result);
 	},
 };
