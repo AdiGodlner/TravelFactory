@@ -14,7 +14,7 @@ router.get(
 	"/vacations",
 	authenticate,
 	requireValidator,
-	asyncHandler(vacationController.getAllvacations),
+	asyncHandler(vacationController.getAllVacations),
 );
 
 // Approve/reject vacation request

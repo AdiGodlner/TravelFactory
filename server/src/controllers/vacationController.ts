@@ -2,7 +2,7 @@ import type { Response } from "express";
 import type { AuthenticatedRequest } from "../middleware/authMiddleware.js";
 
 export const vacationController = {
-	getAllvacations(req: AuthenticatedRequest, res: Response) {
+	getAllVacations(req: AuthenticatedRequest, res: Response) {
 		res.json({
 			message: `All vacations `,
 		});

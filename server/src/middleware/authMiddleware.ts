@@ -1,39 +1,59 @@
 import type { Request, Response, NextFunction } from "express";
+import { UserRole } from "../entities/User.js";
+import { AppError } from "../utils/AppError.js";
+import { env } from "../config/env.js";
+import jwt from "jsonwebtoken";
 
 export interface AuthenticatedRequest extends Request {
 	user?: {
-		id: number;
-		role: string;
+		id: string;
+		role: UserRole;
 	};
 }
 
-export const authenticate = (
+export interface JwtPayload {
+	sub: string;
+	role: UserRole;
+}
+
+export function authenticate(
 	req: AuthenticatedRequest,
 	res: Response,
 	next: NextFunction,
-) => {
-	// TODO replace with real JWT parsing
-	console.log(" in authenticate");
-	req.user = {
-		id: 1,
-		role: "validator",
-	};
+) {
+	const authHeader = req.headers.authorization;
 
-	next();
-};
+	if (!authHeader) {
+		return next(new AppError("Missing authorization header", 401));
+	}
+	const [scheme, token] = authHeader.split(" ");
+	// Authorization: Bearer <token>
+	if (scheme !== "Bearer" || !token) {
+		return next(new AppError("Invalid authorization format", 401));
+	}
 
-export const requireValidator = (
+	try {
+		const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
+
+		req.user = {
+			id: decoded.sub,
+			role: decoded.role,
+		};
+
+		next();
+	} catch {
+		return next(new AppError("Invalid or expired token", 401));
+	}
+}
+
+export function requireValidator(
 	req: AuthenticatedRequest,
 	res: Response,
 	next: NextFunction,
-) => {
-	console.log(" in validate");
-
-	if (req.user?.role !== "validator") {
-		return res.status(403).json({
-			message: "Access denied",
-		});
+) {
+	if (req.user?.role !== UserRole.VALIDATOR) {
+		return next(new AppError("Access denied", 403));
 	}
 
 	next();
-};
+}
