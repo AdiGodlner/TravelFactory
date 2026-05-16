@@ -1,11 +1,12 @@
 import express from "express";
 import {
 	authenticate,
-	requireValidator,
+	requireRole,
 	type AuthenticatedRequest,
 } from "../middleware/authMiddleware.js";
 import { asyncHandler } from "../middleware/asyncHandler.js";
 import { vacationController } from "../controllers/vacationController.js";
+import { UserRole } from "../entities/User.js";
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ const router = express.Router();
 router.get(
 	"/vacations",
 	authenticate,
-	requireValidator,
+	requireRole(UserRole.VALIDATOR),
 	asyncHandler(vacationController.getAllVacations),
 );
 
@@ -21,7 +22,7 @@ router.get(
 router.patch(
 	"/vacations/:id",
 	authenticate,
-	requireValidator,
+	requireRole(UserRole.VALIDATOR),
 	asyncHandler(vacationController.setVacationStatus),
 );
 

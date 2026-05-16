@@ -46,14 +46,12 @@ export function authenticate(
 	}
 }
 
-export function requireValidator(
-	req: AuthenticatedRequest,
-	res: Response,
-	next: NextFunction,
-) {
-	if (req.user?.role !== UserRole.VALIDATOR) {
-		return next(new AppError("Access denied", 403));
-	}
+export function requireRole(role: UserRole) {
+	return (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
+		if (req.user?.role !== role) {
+			return next(new AppError("Access denied", 403));
+		}
 
-	next();
+		next();
+	};
 }
