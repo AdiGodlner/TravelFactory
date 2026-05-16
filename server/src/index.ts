@@ -5,9 +5,10 @@ import { AppDataSource } from "./data-src.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import validatorRoutes from "./routes/validatorRoutes.js";
+import { env } from "./config/env.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 async function bootstrap() {
 	try {
@@ -31,6 +32,10 @@ function startServer() {
 	app.use("/user", userRoutes);
 	app.use("/validator", validatorRoutes);
 
+	// ERROR HANDLER LAST (VERY IMPORTANT)
+	app.use(errorHandler);
+
+	const PORT = env.PORT;
 	app.listen(PORT, () => {
 		console.log(`Server running on http://localhost:${PORT}`);
 	});

@@ -1,31 +1,38 @@
-// services/authService.ts
-import jwt from "jsonwebtoken";
 import { AppDataSource } from "../data-src.js";
-import { User } from "../entities/User.js";
+import { User, UserRole } from "../entities/User.js";
+import { AppError } from "../utils/AppError.js";
 
 const userRepo = AppDataSource.getRepository(User);
 
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret";
+export const authService = {
+	async loginOrCreate(name: string, role: UserRole) {
+		console.log("in login or create");
+		const validRoles = Object.values(UserRole);
 
-export async function loginOrCreate(name: string) {
-	let user = await userRepo.findOne({
-		where: { name },
-	});
+		if (!validRoles.includes(role)) {
+			throw new AppError(`Role must be one of: ${validRoles.join(", ")}`, 400);
+		}
 
-	if (!user) {
-		user = userRepo.create({ name });
-		await userRepo.save(user);
-	}
+		const existingUser = await userRepo.findOne({
+			where: { name },
+		});
 
-	const token = jwt.sign(
-		{
-			userId: user.id,
-		},
-		JWT_SECRET,
-		{
-			expiresIn: "7d",
-		},
-	);
+		// user exists but role mismatch
+		if (existingUser && existingUser.role !== role) {
+			throw new AppError("User exists with different role", 403);
+		}
 
-	return token;
-}
+		// user exists and role matches
+		if (existingUser) {
+			return existingUser;
+		}
+
+		// if user does not exist create new user
+		const newUser = userRepo.create({
+			name,
+			role,
+		});
+
+		return await userRepo.save(newUser);
+	},
+};
