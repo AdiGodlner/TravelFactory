@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import validatorRoutes from "./routes/validatorRoutes.js";
 import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import cors from "cors";
 
 const app = express();
 
@@ -22,6 +23,13 @@ async function bootstrap() {
 }
 
 function startServer() {
+	app.use(
+		cors({
+			origin: env.CLIENT_URL,
+			credentials: true,
+		}),
+	);
+
 	app.use(express.json());
 
 	app.get("/", (req, res) => {

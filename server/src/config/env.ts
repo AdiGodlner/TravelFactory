@@ -17,4 +17,5 @@ export const env = {
 	DB_NAME: requireEnv("DB_NAME"),
 
 	NODE_ENV: requireEnv("NODE_ENV"),
+	CLIENT_URL: requireEnv("CLIENT_URL"),
 };
