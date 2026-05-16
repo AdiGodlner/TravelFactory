@@ -8,14 +8,20 @@ type User = {
 
 export const useAuthStore = defineStore("auth", {
 	state: () => ({
-		token: null as string | null,
-		user: null as User | null,
-	}),
+		token: localStorage.getItem("token") as string | null,
 
+		user: JSON.parse(localStorage.getItem("user") || "null") as User | null,
+	}),
+	getters: {
+		isAuthenticated: (state) => !!state.token,
+	},
 	actions: {
 		setAuth(token: string, user: User) {
 			this.token = token;
 			this.user = user;
+
+			localStorage.setItem("token", token);
+			localStorage.setItem("user", JSON.stringify(user));
 		},
 
 		async login(name: string, role: string) {
@@ -29,6 +35,8 @@ export const useAuthStore = defineStore("auth", {
 		logout() {
 			this.token = null;
 			this.user = null;
+			localStorage.removeItem("token");
+			localStorage.removeItem("user");
 		},
 	},
 });
