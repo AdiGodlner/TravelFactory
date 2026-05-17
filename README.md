@@ -1,6 +1,6 @@
 # TravelFactory
 
-A take-home assignment for TravelFactory. a toy back-office application for managing vacation requests.
+A take-home assignment for TravelFactory. a small back-office application for managing vacation requests.
 
 ## Tech Stack
 
@@ -32,8 +32,8 @@ A take-home assignment for TravelFactory. a toy back-office application for mana
 ### 1. Clone repository
 
 ```bash
-git clone <repository-url>
-cd <project-root>
+git clone git@github.com:AdiGodlner/TravelFactory.git
+cd TravelFactory
 ```
 
 ### 2. Backend setup
@@ -44,8 +44,9 @@ npm install
 ```
 
 Create environment file:
-a .env.example file is provided for convinence
-you are excepceted to fill in the required port DB name and so on that are in that are provided in the example file
+A `.env.example` file is provided for convenience.
+
+Copy the file to `.env` and provide the required database credentials and ports.
 
 ```bash
 cp .env.example .env
@@ -57,8 +58,7 @@ Run backend:
 npm run dev
 ```
 
-server then will start on localhost at the port you gave it
-the server will also print out the port it is running on for convinience
+The server will start on the configured localhost port and print the active address to the console.
 
 ### 2. Frontend setup
 
@@ -73,7 +73,12 @@ Create environment file:
 cp .env.example .env
 ```
 
-note the client env file excpects you to provide the port that the serveer runs on i.e http://localhost:<THE_PORT_YOU_CHOUSE>
+The client `.env` file should point to the backend server URL and port.
+For example:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
 
 Run frontend:
 
@@ -107,3 +112,171 @@ Client **.env**
 ```
 VITE_API_URL=http://localhost:3000
 ```
+
+---
+
+## Authentication Flow
+
+1. User logs in
+2. Server returns JWT token
+3. Token is stored in localStorage
+4. Axios interceptor attaches token to requests
+5. Backend middleware validates token and role
+
+## Roles
+
+### Requester
+
+- Create vacation request
+- View own requests
+- Delete their own request only if they are pending
+
+### Validator
+
+- View all vacation requests
+- Approve or reject requests
+- Must provide comment when rejecting
+
+---
+
+## API Endpoints
+
+### Auth
+
+```
+POST /auth/login
+```
+
+### Requester Routes
+
+```
+POST /user/vacations
+GET  /user/vacations
+DELETE /user/vacations/:id
+```
+
+### Validator Routes
+
+```
+GET  /validator/vacations
+PATCH /validator/vacations/:id
+```
+
+---
+
+## Business Rules
+
+- End date must be after start date
+- Start date must not be in the past
+- Only pending requests can be modified or deleted
+- Rejecting a request requires a comment
+- Validators can only modify pending requests
+
+---
+
+## Testing
+
+Run tests:
+
+```Bash
+cd server
+npm run test
+```
+
+### Covers:
+
+- Authentication flow
+- Role-based access control
+- Vacation creation rules
+- Approval/rejection rules
+- Database isolation between tests
+
+---
+
+## Server structure
+
+The backend follows a layered architecture with separation of concerns.
+
+### Routes
+
+Responsible for:
+
+- defining API endpoints
+- attaching middleware
+- forwarding requests to controllers
+
+### Controllers
+
+Responsible for:
+
+- handling HTTP concerns
+- extracting request data
+- basic request validation
+- forwarding requests to services
+
+### Services
+
+Responsible for:
+
+- business logic
+- validation rules
+- database interactions through TypeORM
+
+### Middleware
+
+The middleware layer handles:
+
+- JWT authentication
+- role-based authorization
+- async error handling
+- centralized error responses
+
+## Client Structure
+
+The client is a Vue 3 application built with Vite.
+
+### Technologies Used
+
+- Vue Router for client-side routing
+- Pinia for state management
+- Axios for API communication
+- localStorage for persisting authentication state across refreshes
+
+### Structure Overview
+
+- `views/` contains the main application pages
+- `components/` contains reusable UI components
+- `stores/` contains Pinia state management logic
+- `api/` contains Axios API wrappers and configuration
+- `router/` contains route definitions and role-based navigation guards
+
+The client communicates with the backend through a centralized Axios instance that automatically attaches the JWT token to authenticated requests.
+
+## Known Limitations
+
+- No pagination is implemented; the server currently fetches all vacation requests from the database at once, which would not scale well for large datasets.
+- No dedicated DTO validation layer was implemented; validation is handled manually inside controllers and services.
+- No real user signup, password authentication, or refresh token flow exists. Users are created automatically on first login for simplicity.
+- Frontend styling is intentionally minimal due to time constraints.
+- No advanced production security hardening was implemented (rate limiting, CSRF protection, advanced XSS sanitization, etc.).
+
+---
+
+## Design Decisions
+
+### Client
+
+- A minimal responsive UI approach was chosen to prioritize functionality and architecture within the assignment time constraints.
+- Pinia was used for centralized and predictable state management.
+- Authentication state is persisted using `localStorage` to allow session persistence across page refreshes.
+- Axios is configured through a centralized client with automatic JWT attachment via interceptors.
+- Vue Router navigation guards are used for role-based route protection.
+
+### Server
+
+- Validation logic was implemented manually instead of using a formal DTO validation library to keep the project scope manageable.
+- Authentication is JWT-based and authorization is role-based. UUID user identifiers were chosen to simplify future extension into a more complete authentication system.
+- Environment variables are loaded once into a typed configuration module so the application fails fast on invalid startup configuration.
+- Error handling is centralized through a custom error middleware to provide consistent API responses and simplify controller logic.
+- Business logic is separated into service layers to keep controllers focused on HTTP concerns.
+- Middleware is used to separate authentication, authorization, async error handling, and request processing concerns.
