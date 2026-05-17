@@ -85,8 +85,10 @@ button:active {
 				<option value="requester">Requester</option>
 				<option value="validator">Validator</option>
 			</select>
-
-			<button @click="handleLogin">Login</button>
+			<p v-if="error" class="error">
+				{{ error }}
+			</p>
+			<button @click="handleLogin" :disabled="loading">Login</button>
 		</div>
 	</div>
 </template>
@@ -95,6 +97,10 @@ button:active {
 import { ref } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter } from "vue-router";
+import { getErrorMessage } from "../utils/error";
+
+const error = ref("");
+const loading = ref(false);
 
 const name = ref("");
 const role = ref("requester");
@@ -103,15 +109,29 @@ const auth = useAuthStore();
 const router = useRouter();
 
 async function handleLogin() {
-	if (!name.value) return;
+	error.value = "";
+	loading.value = true;
+	try {
+		if (!name.value) {
+			error.value = "Name is required";
+			return;
+		}
 
-	const user = await auth.login(name.value, role.value);
+		const user = await auth.login(name.value, role.value);
 
-	// redirect based on role
-	if (user.role === "validator") {
-		router.push("/validator");
-	} else {
-		router.push("/requester");
+		// redirect based on role
+		if (user.role === "validator") {
+			router.push("/validator");
+		} else {
+			router.push("/requester");
+		}
+	} catch (err: any) {
+		error.value = getErrorMessage(
+			err,
+			"Login failed user exists with a different rolee",
+		);
+	} finally {
+		loading.value = false;
 	}
 }
 </script>

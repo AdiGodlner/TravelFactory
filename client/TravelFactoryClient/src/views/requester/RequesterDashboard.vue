@@ -30,7 +30,7 @@
 		<p v-if="!loading && vacations.length === 0">
 			No vacation requests yet.
 		</p>
-		<p v-if="fetchError">
+		<p v-if="fetchError" class="error">
 			{{ fetchError }}
 		</p>
 		<ul class="vacation-list">

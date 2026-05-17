@@ -127,6 +127,9 @@ const error = ref("");
 const success = ref(false);
 
 async function submit() {
+	error.value = "";
+	success.value = false;
+
 	if (!startDate.value || !endDate.value) {
 		error.value = "Start and End date are required";
 		return;
@@ -145,11 +148,9 @@ async function submit() {
 		return;
 	}
 
-	error.value = "";
-	success.value = false;
-	loading.value = true;
-
 	try {
+		loading.value = true;
+
 		await store.create({
 			startDate: startDate.value,
 			endDate: endDate.value,

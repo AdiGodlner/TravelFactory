@@ -93,7 +93,7 @@
 		</div>
 		<p v-if="loading">Loading...</p>
 
-		<p v-if="fetchError">
+		<p v-if="fetchError" class="error">
 			{{ fetchError }}
 		</p>
 
