@@ -1,19 +1,101 @@
+<style scoped>
+.create-page {
+	max-width: 520px;
+	margin: 60px auto;
+
+	padding: 24px;
+
+	background: white;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+}
+
+h1 {
+	margin-bottom: 20px;
+	font-size: 1.5rem;
+}
+
+.create-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+label {
+	font-size: 0.9rem;
+	color: var(--text-muted);
+}
+
+input,
+textarea {
+	padding: 10px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+
+	font-size: 1rem;
+	outline: none;
+}
+
+textarea {
+	resize: vertical;
+	min-height: 120px;
+}
+input:focus,
+textarea:focus {
+	border-color: var(--surface);
+}
+
+button {
+	padding: 10px;
+	border-radius: 6px;
+
+	background: var(--surface);
+	color: var(--text-on-surface);
+
+	transition: background var(--transition-medium);
+}
+
+button:hover {
+	background: var(--surface-soft);
+}
+
+button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.error {
+	color: var(--danger);
+	font-size: 0.9rem;
+}
+
+.success {
+	color: var(--success);
+	font-size: 0.9rem;
+}
+</style>
 <template>
-	<div>
+	<div class="create-page">
 		<h1>Create Vacation Request</h1>
 
-		<form @submit.prevent="submit">
-			<div>
+		<form class="create-form" @submit.prevent="submit">
+			<div class="field">
 				<label>Start Date</label>
 				<input v-model="startDate" type="date" required />
 			</div>
 
-			<div>
+			<div class="field">
 				<label>End Date</label>
 				<input v-model="endDate" type="date" required />
 			</div>
 
-			<div>
+			<div class="field">
 				<label>Reason</label>
 				<textarea v-model="reason"></textarea>
 			</div>
@@ -22,9 +104,9 @@
 				{{ loading ? "Submitting..." : "Submit" }}
 			</button>
 
-			<p v-if="error">{{ error }}</p>
+			<p v-if="error" class="error">{{ error }}</p>
 
-			<p v-if="success">Vacation request created!</p>
+			<p v-if="success" class="success">Vacation request created!</p>
 		</form>
 	</div>
 </template>
@@ -32,10 +114,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useVacationStore } from "../../stores/vacations";
-import { useRouter } from "vue-router";
+import { getErrorMessage } from "../../utils/error";
 
 const store = useVacationStore();
-const router = useRouter();
 
 const startDate = ref("");
 const endDate = ref("");
@@ -61,8 +142,8 @@ async function submit() {
 		endDate.value = "";
 		reason.value = "";
 		success.value = true;
-	} catch (e: any) {
-		error.value = e?.response?.data?.message || "Failed to create request";
+	} catch (err: any) {
+		error.value = getErrorMessage(err, "Failed to create request");
 	} finally {
 		loading.value = false;
 	}

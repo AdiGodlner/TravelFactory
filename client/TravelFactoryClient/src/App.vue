@@ -1,6 +1,41 @@
+<style scoped>
+.app-shell {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: var(--bg);
+}
+
+/* MAIN CONTENT takes remaining space */
+.main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+}
+
+.footer {
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 0.9rem;
+	color: var(--text-on-surface);
+	background: var(--surface-soft);
+	border-top: 1px solid var(--border);
+}
+</style>
 <template>
-	<AppNavbar />
-	<router-view />
+	<div class="app-shell">
+		<AppNavbar />
+		<main class="main">
+			<router-view />
+		</main>
+		<footer class="footer">
+			<span>this is the end of the page</span>
+		</footer>
+	</div>
 </template>
 
 <script setup lang="ts">

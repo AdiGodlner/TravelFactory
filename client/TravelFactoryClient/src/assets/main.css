@@ -1,0 +1,108 @@
+:root {
+	--bg: #f9fafb;
+	--surface: #2f5d50;
+	--surface-soft: #3a6b5c;
+
+	/* text */
+	--text: #111827;
+	--text-muted: #6b7280;
+	--text-on-surface: #f3f4f6;
+	/* borders */
+	--border: #e5e7eb;
+
+	/* brand */
+	--primary: #378896;
+
+	/* status */
+	--danger: #a42f2f;
+	--danger-hover: #8d2121;
+	--btn-disabled: #9ca3af;
+
+	/* interaction tokens */
+	--hover-bg: rgba(255, 255, 255, 0.12);
+	--active-bg: rgba(255, 255, 255, 0.18);
+
+	--transition-fast: 0.15s ease;
+	--transition-medium: 0.2s ease;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	font-family:
+		system-ui,
+		-apple-system,
+		Segoe UI,
+		Roboto,
+		sans-serif;
+	background: var(--bg);
+	color: #111;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.dashboard {
+	max-width: 900px;
+	margin: 40px auto;
+	padding: 0 16px;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+.vacation-list {
+	margin-top: 20px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.vacation-row {
+	display: flex;
+	flex-direction: column;
+
+	gap: 6px;
+
+	padding: 14px 16px;
+
+	transition: background var(--transition-medium);
+}
+.vacation-row:nth-child(even) {
+	background: #eef3f1;
+}
+
+.vacation-row:nth-child(odd) {
+	background: #ffffff;
+}
+.vacation-row:hover {
+	background: #dde7e3;
+}
+.vacation-row strong {
+	font-size: 1rem;
+}
+
+.vacation-row div {
+	font-size: 0.9rem;
+	color: var(--text-muted);
+}
