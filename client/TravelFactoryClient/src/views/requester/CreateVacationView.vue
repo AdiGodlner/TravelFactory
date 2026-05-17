@@ -127,6 +127,24 @@ const error = ref("");
 const success = ref(false);
 
 async function submit() {
+	if (!startDate.value || !endDate.value) {
+		error.value = "Start and End date are required";
+		return;
+	}
+	const today = new Date();
+	today.setHours(0, 0, 0, 0);
+
+	const start = new Date(startDate.value);
+	start.setHours(0, 0, 0, 0);
+	if (start < today) {
+		error.value = "Start date cannot be in the past";
+		return;
+	}
+	if (new Date(endDate.value) < start) {
+		error.value = "End date must be after start date";
+		return;
+	}
+
 	error.value = "";
 	success.value = false;
 	loading.value = true;
