@@ -31,14 +31,14 @@ A take-home assignment for TravelFactory. a small back-office application for ma
 
 ### 1. Clone repository
 
-```bash
+```Bash
 git clone git@github.com:AdiGodlner/TravelFactory.git
 cd TravelFactory
 ```
 
 ### 2. Backend setup
 
-```bash
+```Bash
 cd server
 npm install
 ```
@@ -48,13 +48,13 @@ A `.env.example` file is provided for convenience.
 
 Copy the file to `.env` and provide the required database credentials and ports.
 
-```bash
+```Bash
 cp .env.example .env
 ```
 
 Run backend:
 
-```bash
+```Bash
 npm run dev
 ```
 
@@ -62,14 +62,14 @@ The server will start on the configured localhost port and print the active addr
 
 ### 2. Frontend setup
 
-```bash
+```Bash
 cd client
 npm install
 ```
 
 Create environment file:
 
-```bash
+```Bash
 cp .env.example .env
 ```
 
@@ -82,7 +82,7 @@ VITE_API_URL=http://localhost:3000
 
 Run frontend:
 
-```bash
+```Bash
 npm run dev
 ```
 
@@ -92,7 +92,7 @@ npm run dev
 
 Server **.env**
 
-```
+```env
 PORT=3000
 NODE_ENV=dev or prod
 
@@ -109,7 +109,7 @@ CLIENT_URL=http://localhost:5173
 
 Client **.env**
 
-```
+```env
 VITE_API_URL=http://localhost:3000
 ```
 
@@ -122,6 +122,17 @@ VITE_API_URL=http://localhost:3000
 3. Token is stored in localStorage
 4. Axios interceptor attaches token to requests
 5. Backend middleware validates token and role
+
+### Authentication Behavior (Login or Create)
+
+For simplicity, the authentication system does not use a traditional signup flow.
+
+When a user attempts to log in:
+
+- If a user with the given name and role exists, they are returned.
+- If no matching user exists, a new user is automatically created with the provided name and role.
+
+This behavior was implemented to simplify the scope of the assignment and remove the need for a separate registration system while still allowing role-based access testing.
 
 ## Roles
 
