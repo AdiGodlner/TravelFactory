@@ -27,10 +27,11 @@ export const vacationService = {
 		endDate: string,
 		reason?: string,
 	) {
-		const start = new Date(startDate);
-		const end = new Date(endDate);
-		const now = new Date();
-
+		const start = toLocalDate(new Date(startDate));
+		const end = toLocalDate(new Date(endDate));
+		const now = toLocalDate(new Date());
+		console.log(now);
+		console.log(start);
 		if (end <= start) {
 			throw new AppError("End date must be after start date", 400);
 		}
@@ -96,3 +97,7 @@ export const vacationService = {
 		return { success: true };
 	},
 };
+
+function toLocalDate(date: Date) {
+	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}

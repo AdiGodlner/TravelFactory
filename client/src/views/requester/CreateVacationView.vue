@@ -50,6 +50,10 @@ const loading = ref(false);
 const error = ref("");
 const success = ref(false);
 
+function toLocalDate(date: Date) {
+	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
 async function submit() {
 	error.value = "";
 	success.value = false;
@@ -58,16 +62,16 @@ async function submit() {
 		error.value = "Start and End date are required";
 		return;
 	}
-	const today = new Date();
-	today.setHours(0, 0, 0, 0);
+	const today = toLocalDate(new Date());
+	const start = toLocalDate(new Date(startDate.value));
 
-	const start = new Date(startDate.value);
-	start.setHours(0, 0, 0, 0);
 	if (start < today) {
+		console.log("haserror");
 		error.value = "Start date cannot be in the past";
 		return;
 	}
-	if (new Date(endDate.value) < start) {
+	if (toLocalDate(new Date(endDate.value)) < start) {
+		console.log("has error");
 		error.value = "End date must be after start date";
 		return;
 	}
