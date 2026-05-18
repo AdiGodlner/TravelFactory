@@ -30,10 +30,6 @@
 /* BUTTONS */
 
 .actions button {
-	padding: var(--space-2) var(--space-3);
-
-	border-radius: var(--radius-md);
-
 	color: var(--text-on-surface);
 }
 

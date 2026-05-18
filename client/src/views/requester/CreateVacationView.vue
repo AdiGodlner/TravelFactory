@@ -5,7 +5,7 @@
 
 	padding: var(--space-6);
 
-	background: white;
+	background: var(--row-light);
 	border: 1px solid var(--border);
 	border-radius: var(--radius-lg);
 }
@@ -15,85 +15,32 @@ h1 {
 	font-size: var(--font-2xl) 1.5rem;
 }
 
-.create-form {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-4);
-}
-
-.field {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-2);
-}
-
-label {
-	font-size: var(--font-sm);
-	color: var(--text-muted);
-}
-
-input,
-textarea {
-	padding: var(--space-3);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
-
-	font-size: var(--font-md);
-}
-
 textarea {
 	resize: vertical;
 	min-height: 120px;
-}
-
-button {
-	padding: var(--space-3);
-	border-radius: var(--radius-md);
-
-	background: var(--surface);
-	color: var(--text-on-surface);
-}
-
-button:hover {
-	background: var(--surface-soft);
-}
-
-button:disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
-}
-
-.error {
-	color: var(--danger);
-	font-size: var(--font-sm);
-}
-
-.success {
-	color: var(--success);
-	font-size: var(--font-sm);
 }
 </style>
 <template>
 	<div class="create-page layout-center">
 		<h1>Create Vacation Request</h1>
 
-		<form class="create-form" @submit.prevent="submit">
+		<form @submit.prevent="submit" class="form">
 			<div class="field">
-				<label>Start Date</label>
+				<label class="label">Start Date</label>
 				<input v-model="startDate" type="date" required />
 			</div>
 
 			<div class="field">
-				<label>End Date</label>
+				<label class="label">End Date</label>
 				<input v-model="endDate" type="date" required />
 			</div>
 
 			<div class="field">
-				<label>Reason</label>
+				<label class="label">Reason</label>
 				<textarea v-model="reason"></textarea>
 			</div>
 
-			<button :disabled="loading">
+			<button :disabled="loading" class="submit-btn">
 				{{ loading ? "Submitting..." : "Submit" }}
 			</button>
 

@@ -24,49 +24,32 @@ h2 {
 	text-align: center;
 	margin-bottom: var(--space-2);
 }
-
-input,
-select {
-	padding: var(--space-3) var(--space-3);
-
-	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
-
-	font-size: var(--font-md);
-}
-
-button {
-	padding: var(--space-3) var(--space-4);
-
-	border-radius: var(--radius-md);
-
-	background: var(--surface);
-	color: var(--text-on-surface);
-}
-
-button:hover {
-	background: var(--surface-soft);
-}
-
-button:active {
-	transform: scale(0.98);
-}
 </style>
 <template>
 	<div class="login-page layout-center">
 		<div class="login-card">
 			<h2>Login</h2>
+			<form @submit.prevent="handleLogin" class="form">
+				<div class="field">
+					<label for="name" class="label">Name</label>
+					<input v-model="name" placeholder="Name" />
+				</div>
+				<div class="field">
+					<label for="role" class="label">Role</label>
+					<select v-model="role">
+						<option value="requester">Requester</option>
+						<option value="validator">Validator</option>
+					</select>
+				</div>
 
-			<input v-model="name" placeholder="Name" />
+				<p v-if="error" class="error">
+					{{ error }}
+				</p>
 
-			<select v-model="role">
-				<option value="requester">Requester</option>
-				<option value="validator">Validator</option>
-			</select>
-			<p v-if="error" class="error">
-				{{ error }}
-			</p>
-			<button @click="handleLogin" :disabled="loading">Login</button>
+				<button type="submit" :disabled="loading" class="submit-btn">
+					Login
+				</button>
+			</form>
 		</div>
 	</div>
 </template>

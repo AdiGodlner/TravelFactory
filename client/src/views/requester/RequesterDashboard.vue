@@ -3,9 +3,6 @@
 	margin-top: var(--space-3);
 	align-self: flex-start;
 
-	padding: var(--space-2) var(--space-3);
-	border-radius: var(--radius-md);
-
 	background: var(--danger);
 	color: var(--text-on-surface);
 }
