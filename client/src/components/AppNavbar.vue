@@ -16,13 +16,8 @@ nav {
 
 nav a {
 	padding: 8px 12px;
-	font-size: 1rem;
+	font-size: var(--font-md);
 	color: var(--text-on-surface);
-
-	transition:
-		background var(--transition-medium),
-		opacity var(--transition-medium),
-		transform var(--transition-fast);
 }
 
 nav a:hover {
@@ -41,15 +36,11 @@ nav a.router-link-active {
 	gap: 20px;
 }
 .nav-right button {
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--login-btn);
 	color: var(--text-on-surface);
 
 	padding: 8px 14px;
 	border-radius: 6px;
-
-	transition:
-		background var(--transition-medium),
-		transform var(--transition-fast);
 }
 .nav-right button:hover {
 	background: var(--hover-bg);
@@ -59,7 +50,7 @@ nav a.router-link-active {
 }
 </style>
 <template>
-	<nav>
+	<nav class="dark-focus-context">
 		<div class="nav-left">
 			<router-link v-if="isRequester" to="/requester">
 				My Vacations

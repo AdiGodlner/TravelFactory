@@ -19,10 +19,10 @@
 
 	padding: 28px;
 
-	background: white;
+	background: var(--row-light);
 
 	border: 1px solid var(--border);
-	border-radius: 10px;
+	border-radius: var(--radius-lg);
 
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -37,33 +37,18 @@ select {
 	padding: 10px 12px;
 
 	border: 1px solid var(--border);
-	border-radius: 6px;
+	border-radius: var(--radius-md);
 
-	font-size: 1rem;
-
-	outline: none;
-
-	transition:
-		border-color var(--transition-medium),
-		background var(--transition-medium);
-}
-
-input:focus,
-select:focus {
-	border-color: var(--surface-soft);
+	font-size: var(--font-md);
 }
 
 button {
 	padding: 10px 14px;
 
-	border-radius: 6px;
+	border-radius: var(--radius-md);
 
 	background: var(--surface);
 	color: var(--text-on-surface);
-
-	transition:
-		background var(--transition-medium),
-		transform var(--transition-fast);
 }
 
 button:hover {

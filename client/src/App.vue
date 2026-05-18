@@ -20,7 +20,7 @@
 	align-items: center;
 	justify-content: center;
 
-	font-size: 0.9rem;
+	font-size: var(--font-sm);
 	color: var(--text-on-surface);
 	background: var(--surface-soft);
 	border-top: 1px solid var(--border);

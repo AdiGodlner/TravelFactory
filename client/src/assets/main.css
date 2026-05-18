@@ -1,27 +1,72 @@
 :root {
-	--bg: #f9fafb;
-	--surface: #2f5d50;
-	--surface-soft: #3a6b5c;
+	/* backgrounds */
+	--bg: #f8fafc;
+
+	/* surfaces */
+	--surface: #23463d;
+	--surface-soft: #2f5d50;
 
 	/* text */
 	--text: #111827;
-	--text-muted: #6b7280;
-	--text-on-surface: #f3f4f6;
-	/* borders */
-	--border: #e5e7eb;
+	--text-muted: #4b5563;
+	--text-on-surface: #f9fafb;
 
-	/* brand */
-	--primary: #378896;
+	/* borders */
+	--border: #d1d5db;
 
 	/* status */
-	--danger: #a42f2f;
-	--danger-hover: #8d2121;
-	--btn-disabled: #9ca3af;
+	--danger: #b42318;
+	--danger-hover: #912018;
 
-	/* interaction tokens */
-	--hover-bg: rgba(255, 255, 255, 0.12);
-	--active-bg: rgba(255, 255, 255, 0.18);
+	/* misc */
+	--login-btn: rgba(255, 255, 255, 0.08);
+	/* interaction */
+	--hover-bg: rgba(255, 255, 255, 0.16);
+	--active-bg: rgba(255, 255, 255, 0.24);
 
+	/* rows */
+	--row-light: #ffffff;
+	--row-dark: #edf4f1;
+	--row-hover: #dceae4;
+
+	/* focus */
+	--focus-ring: #2563eb;
+	/* for dark surfaces  */
+	--focus-ring-inverse: #f9fafb;
+	--focus-bg-dark: rgba(249, 250, 251, 0.12);
+
+	/* font sizes */
+	--font-xs: 0.75rem; /* 12px */
+	--font-sm: 0.875rem; /* 14px */
+	--font-md: 1rem; /* 16px (base) */
+	--font-lg: 1.125rem; /* 18px */
+	--font-xl: 1.25rem; /* 20px */
+	--font-2xl: 1.5rem; /* 24px */
+	--font-3xl: 2rem; /* 32px */
+
+	/* line-height */
+	--line-height-sm: 1.2;
+	--line-height-md: 1.5;
+	--line-height-lg: 1.7;
+
+	/* radios */
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--radius-lg: 10px;
+	--radius-xl: 14px;
+
+	/* spacing */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+	--space-10: 40px;
+	--space-12: 48px;
+
+	/* transitions */
 	--transition-fast: 0.15s ease;
 	--transition-medium: 0.2s ease;
 }
@@ -35,14 +80,19 @@
 html,
 body {
 	height: 100%;
+
 	font-family:
 		system-ui,
 		-apple-system,
 		Segoe UI,
 		Roboto,
 		sans-serif;
+
+	font-size: var(--font-md);
+	line-height: var(--line-height-md);
+
 	background: var(--bg);
-	color: #111;
+	color: var(--text);
 }
 
 button {
@@ -71,6 +121,38 @@ h1 {
 	margin-bottom: 1.5rem;
 }
 
+button,
+a,
+input,
+select,
+textarea {
+	transition:
+		background-color var(--transition-fast),
+		color var(--transition-fast),
+		border-color var(--transition-fast),
+		opacity var(--transition-fast),
+		box-shadow var(--transition-fast),
+		outline var(--transition-fast),
+		transform var(--transition-fast);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 3px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
+.dark-focus-context button:focus-visible,
+.dark-focus-context a:focus-visible,
+.dark-focus-context input:focus-visible {
+	box-shadow: 0 0 0 3px var(--focus-ring-inverse);
+	background: var(--focus-bg-dark);
+	color: var(--text-on-surface);
+}
+
 .vacation-list {
 	margin-top: 20px;
 	border: 1px solid var(--border);
@@ -89,14 +171,14 @@ h1 {
 	transition: background var(--transition-medium);
 }
 .vacation-row:nth-child(even) {
-	background: #eef3f1;
+	background: var(--row-dark);
 }
 
 .vacation-row:nth-child(odd) {
-	background: #ffffff;
+	background: var(--row-light);
 }
 .vacation-row:hover {
-	background: #dde7e3;
+	background: var(--row-hover);
 }
 .vacation-row strong {
 	font-size: 1rem;
@@ -111,6 +193,6 @@ h1 {
 	word-break: break-word;
 }
 .error {
-	color: #d33;
+	color: var(--danger);
 	font-size: 0.9rem;
 }

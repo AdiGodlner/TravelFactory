@@ -14,7 +14,7 @@
 	align-items: center;
 	gap: 6px;
 
-	font-size: 0.95rem;
+	font-size: var(--font-md);
 	color: var(--text);
 }
 
@@ -32,13 +32,9 @@
 .actions button {
 	padding: 7px 12px;
 
-	border-radius: 6px;
+	border-radius: var(--radius-md);
 
 	color: var(--text-on-surface);
-
-	transition:
-		background var(--transition-medium),
-		transform var(--transition-fast);
 }
 
 /* approve */

@@ -7,12 +7,12 @@
 
 	background: white;
 	border: 1px solid var(--border);
-	border-radius: 10px;
+	border-radius: var(--radius-lg);
 }
 
 h1 {
 	margin-bottom: 20px;
-	font-size: 1.5rem;
+	font-size: var(--font-2xl) 1.5rem;
 }
 
 .create-form {
@@ -28,7 +28,7 @@ h1 {
 }
 
 label {
-	font-size: 0.9rem;
+	font-size: var(--font-sm);
 	color: var(--text-muted);
 }
 
@@ -36,29 +36,22 @@ input,
 textarea {
 	padding: 10px;
 	border: 1px solid var(--border);
-	border-radius: 6px;
+	border-radius: var(--radius-md);
 
-	font-size: 1rem;
-	outline: none;
+	font-size: var(--font-md);
 }
 
 textarea {
 	resize: vertical;
 	min-height: 120px;
 }
-input:focus,
-textarea:focus {
-	border-color: var(--surface);
-}
 
 button {
 	padding: 10px;
-	border-radius: 6px;
+	border-radius: var(--radius-md);
 
 	background: var(--surface);
 	color: var(--text-on-surface);
-
-	transition: background var(--transition-medium);
 }
 
 button:hover {
@@ -72,12 +65,12 @@ button:disabled {
 
 .error {
 	color: var(--danger);
-	font-size: 0.9rem;
+	font-size: var(--font-sm);
 }
 
 .success {
 	color: var(--success);
-	font-size: 0.9rem;
+	font-size: var(--font-sm);
 }
 </style>
 <template>
