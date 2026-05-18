@@ -103,19 +103,19 @@
 					<strong> {{ v.startDate }} → {{ v.endDate }} </strong>
 				</div>
 
-				<div>Status: {{ v.status }}</div>
+				<div>
+					<p>Status: {{ v.status }}</p>
+				</div>
 
-				<div v-if="v.reason">Reason: {{ v.reason }}</div>
+				<div v-if="v.reason">
+					<p>Reason: {{ v.reason }}</p>
+				</div>
 
 				<!-- ACTIONS ONLY FOR PENDING -->
 				<div v-if="v.status === 'pending'" class="actions">
-					<button @click="approve(v.id)" class="approve-btn">
-						Approve
-					</button>
+					<button @click="approve(v.id)" class="approve-btn">Approve</button>
 
-					<button @click="reject(v.id)" class="reject-btn">
-						Reject
-					</button>
+					<button @click="reject(v.id)" class="reject-btn">Reject</button>
 				</div>
 
 				<div v-if="v.comments">Comments: {{ v.comments }}</div>

@@ -105,6 +105,10 @@ h1 {
 .vacation-row div {
 	font-size: 0.9rem;
 	color: var(--text-muted);
+	max-width: 100%;
+
+	overflow-wrap: break-word;
+	word-break: break-word;
 }
 .error {
 	color: #d33;
