@@ -37,7 +37,6 @@
 				>
 					Delete request
 				</button>
-				<!-- disabled state if request is not pending -->
 			</li>
 		</ul>
 	</div>

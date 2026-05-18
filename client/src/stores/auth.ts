@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { login as loginApi } from "../api/auth";
+import { useVacationStore } from "./vacations";
 
 type User = {
 	id: string;
@@ -37,6 +38,10 @@ export const useAuthStore = defineStore("auth", {
 			this.user = null;
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
+			// remove user save data from store when logging out
+
+			const store = useVacationStore();
+			store.$reset();
 		},
 	},
 });

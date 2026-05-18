@@ -22,15 +22,23 @@ export const useVacationStore = defineStore("vacations", {
 		allVacations: [] as Vacation[],
 		vacations: [] as Vacation[],
 		loading: false,
+		loaded: false,
 	}),
 
 	actions: {
 		// requester requests
 		async fetchMyVacations() {
+			if (this.loading || this.loaded) {
+				//  prevent race conditions
+				// and only fetch on first load otherwise manage in store
+				return;
+			}
+
 			this.loading = true;
 
 			try {
 				this.vacations = await getMyVacations();
+				this.loaded = true;
 			} finally {
 				this.loading = false;
 			}
@@ -44,8 +52,9 @@ export const useVacationStore = defineStore("vacations", {
 			this.loading = true;
 
 			try {
-				const res = await createVacation(payload);
-				return res;
+				const newVacation = await createVacation(payload);
+				this.vacations.unshift(newVacation);
+				return newVacation;
 			} finally {
 				this.loading = false;
 			}
