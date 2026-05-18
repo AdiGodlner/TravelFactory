@@ -9,7 +9,6 @@ export function errorHandler(
 	_next: NextFunction,
 ) {
 	const isProd = env.NODE_ENV === "prod";
-	console.log("in error handler");
 	let statusCode = 500;
 	let message = "Internal Server Error";
 

@@ -6,7 +6,6 @@ const userRepo = AppDataSource.getRepository(User);
 
 export const authService = {
 	async loginOrCreate(name: string, role: UserRole) {
-		console.log("in login or create");
 		const validRoles = Object.values(UserRole);
 
 		if (!validRoles.includes(role)) {

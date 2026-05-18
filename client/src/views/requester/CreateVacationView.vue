@@ -62,17 +62,16 @@ async function submit() {
 		error.value = "Start and End date are required";
 		return;
 	}
+	// reset time to midnight same day
 	const today = toLocalDate(new Date());
 	const start = toLocalDate(new Date(startDate.value));
 
 	if (start < today) {
-		console.log("haserror");
 		error.value = "Start date cannot be in the past";
 		return;
 	}
 	if (toLocalDate(new Date(endDate.value)) < start) {
-		console.log("has error");
-		error.value = "End date must be after start date";
+		error.value = "End date must be equal or after start date";
 		return;
 	}
 

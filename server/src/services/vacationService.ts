@@ -30,10 +30,8 @@ export const vacationService = {
 		const start = toLocalDate(new Date(startDate));
 		const end = toLocalDate(new Date(endDate));
 		const now = toLocalDate(new Date());
-		console.log(now);
-		console.log(start);
-		if (end <= start) {
-			throw new AppError("End date must be after start date", 400);
+		if (end < start) {
+			throw new AppError("End date must be equal or after start date", 400);
 		}
 
 		if (start < now) {
