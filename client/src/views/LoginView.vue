@@ -1,23 +1,16 @@
 <style scoped>
 .login-page {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	min-height: calc(100vh - 160px);
-
-	padding: 24px;
+	padding: var(--space-6);
 }
-
 .login-card {
 	width: 100%;
 	max-width: 420px;
 
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: var(--space-5);
 
-	padding: 28px;
+	padding: var(--space-8);
 
 	background: var(--row-light);
 
@@ -29,12 +22,12 @@
 
 h2 {
 	text-align: center;
-	margin-bottom: 8px;
+	margin-bottom: var(--space-2);
 }
 
 input,
 select {
-	padding: 10px 12px;
+	padding: var(--space-3) var(--space-3);
 
 	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
@@ -43,7 +36,7 @@ select {
 }
 
 button {
-	padding: 10px 14px;
+	padding: var(--space-3) var(--space-4);
 
 	border-radius: var(--radius-md);
 
@@ -60,7 +53,7 @@ button:active {
 }
 </style>
 <template>
-	<div class="login-page">
+	<div class="login-page layout-center">
 		<div class="login-card">
 			<h2>Login</h2>
 

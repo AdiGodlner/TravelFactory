@@ -1,9 +1,9 @@
 <style scoped>
 .vacation-row button {
-	margin-top: 8px;
+	margin-top: var(--space-3);
 	align-self: flex-start;
 
-	padding: 6px 10px;
+	padding: var(--space-2) var(--space-3);
 	border-radius: var(--radius-md);
 
 	background: var(--danger);
@@ -15,7 +15,7 @@
 </style>
 
 <template>
-	<div class="dashboard">
+	<div class="layout-full">
 		<h1>My Vacation Requests</h1>
 
 		<p v-if="loading">Loading...</p>

@@ -110,12 +110,6 @@ a {
 	color: inherit;
 }
 
-.dashboard {
-	max-width: 900px;
-	margin: 40px auto;
-	padding: 0 16px;
-}
-
 h1 {
 	text-align: center;
 	margin-bottom: 1.5rem;
@@ -151,6 +145,21 @@ textarea:focus-visible {
 	box-shadow: 0 0 0 3px var(--focus-ring-inverse);
 	background: var(--focus-bg-dark);
 	color: var(--text-on-surface);
+}
+
+.layout-center {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-self: center;
+}
+
+.layout-full {
+	max-width: 900px;
+	margin: 40px;
+	padding: 0 16px;
+	align-self: center;
 }
 
 .vacation-list {

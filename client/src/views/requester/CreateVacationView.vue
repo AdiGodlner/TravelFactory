@@ -1,9 +1,9 @@
 <style scoped>
 .create-page {
 	max-width: 520px;
-	margin: 60px auto;
+	margin: 60px;
 
-	padding: 24px;
+	padding: var(--space-6);
 
 	background: white;
 	border: 1px solid var(--border);
@@ -11,20 +11,20 @@
 }
 
 h1 {
-	margin-bottom: 20px;
+	margin-bottom: var(--space-5);
 	font-size: var(--font-2xl) 1.5rem;
 }
 
 .create-form {
 	display: flex;
 	flex-direction: column;
-	gap: 14px;
+	gap: var(--space-4);
 }
 
 .field {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: var(--space-2);
 }
 
 label {
@@ -34,7 +34,7 @@ label {
 
 input,
 textarea {
-	padding: 10px;
+	padding: var(--space-3);
 	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
 
@@ -47,7 +47,7 @@ textarea {
 }
 
 button {
-	padding: 10px;
+	padding: var(--space-3);
 	border-radius: var(--radius-md);
 
 	background: var(--surface);
@@ -74,7 +74,7 @@ button:disabled {
 }
 </style>
 <template>
-	<div class="create-page">
+	<div class="create-page layout-center">
 		<h1>Create Vacation Request</h1>
 
 		<form class="create-form" @submit.prevent="submit">

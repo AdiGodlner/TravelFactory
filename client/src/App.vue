@@ -1,6 +1,6 @@
 <style scoped>
 .app-shell {
-	min-height: 100vh;
+	min-height: 100dvh;
 	display: flex;
 	flex-direction: column;
 	background: var(--bg);
@@ -11,7 +11,7 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	padding: 24px;
+	padding: var(--space-6);
 }
 
 .footer {

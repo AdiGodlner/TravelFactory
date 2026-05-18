@@ -6,16 +6,16 @@ nav {
 
 	justify-content: space-between;
 
-	gap: 20px;
+	gap: var(--space-5);
 
-	padding: 0 24px;
+	padding: 0 var(--space-6);
 
 	background: var(--surface);
 	color: var(--text-on-surface);
 }
 
 nav a {
-	padding: 8px 12px;
+	padding: var(--space-2) var(--space-3);
 	font-size: var(--font-md);
 	color: var(--text-on-surface);
 }
@@ -33,14 +33,14 @@ nav a.router-link-active {
 .nav-right {
 	display: flex;
 	align-items: center;
-	gap: 20px;
+	gap: var(--space-5);
 }
 .nav-right button {
 	background: var(--login-btn);
 	color: var(--text-on-surface);
 
-	padding: 8px 14px;
-	border-radius: 6px;
+	padding: var(--space-2) var(--space-4);
+	border-radius: var(--radius-md);
 }
 .nav-right button:hover {
 	background: var(--hover-bg);

@@ -4,15 +4,15 @@
 .filters {
 	display: flex;
 	justify-content: center;
-	gap: 18px;
+	gap: var(--space-5);
 	flex-wrap: wrap;
-	margin-bottom: 24px;
+	margin-bottom: var(--space-6);
 }
 
 .filters label {
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: var(--space-2);
 
 	font-size: var(--font-md);
 	color: var(--text);
@@ -22,15 +22,15 @@
 
 .actions {
 	display: flex;
-	gap: 10px;
+	gap: var(--space-3);
 
-	margin-top: 8px;
+	margin-top: var(--space-2);
 }
 
 /* BUTTONS */
 
 .actions button {
-	padding: 7px 12px;
+	padding: var(--space-2) var(--space-3);
 
 	border-radius: var(--radius-md);
 
@@ -63,7 +63,7 @@
 }
 </style>
 <template>
-	<div class="dashboard">
+	<div class="layout-full">
 		<h1>Validator Dashboard</h1>
 
 		<div class="filters">
