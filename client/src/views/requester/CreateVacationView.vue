@@ -1,27 +1,11 @@
 <style scoped>
-.create-page {
-	max-width: 520px;
-	margin: 60px;
-
-	padding: var(--space-6);
-
-	background: var(--row-light);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-lg);
-}
-
-h1 {
-	margin-bottom: var(--space-5);
-	font-size: var(--font-2xl) 1.5rem;
-}
-
 textarea {
 	resize: vertical;
 	min-height: 120px;
 }
 </style>
 <template>
-	<div class="create-page layout-center">
+	<div class="content-narrow layout-center">
 		<h1>Create Vacation Request</h1>
 
 		<form @submit.prevent="submit" class="form">

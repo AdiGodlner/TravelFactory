@@ -26,37 +26,6 @@
 
 	margin-top: var(--space-2);
 }
-
-/* BUTTONS */
-
-.actions button {
-	color: var(--text-on-surface);
-}
-
-/* approve */
-
-.approve-btn {
-	background: var(--surface);
-}
-
-.approve-btn:hover {
-	background: var(--surface-soft);
-}
-
-/* reject */
-
-.reject-btn {
-	background: var(--danger);
-}
-
-.reject-btn:hover {
-	background: var(--danger-hover);
-}
-
-/* press effect */
-.actions button:active {
-	transform: scale(0.98);
-}
 </style>
 <template>
 	<div class="layout-full">
@@ -105,9 +74,9 @@
 
 				<!-- ACTIONS ONLY FOR PENDING -->
 				<div v-if="v.status === 'pending'" class="actions">
-					<button @click="approve(v.id)" class="approve-btn">Approve</button>
+					<button @click="approve(v.id)" class="success-btn">Approve</button>
 
-					<button @click="reject(v.id)" class="reject-btn">Reject</button>
+					<button @click="reject(v.id)" class="danger-btn">Reject</button>
 				</div>
 
 				<div v-if="v.comments">Comments: {{ v.comments }}</div>

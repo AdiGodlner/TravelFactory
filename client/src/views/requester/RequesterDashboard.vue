@@ -2,12 +2,6 @@
 .vacation-row button {
 	margin-top: var(--space-3);
 	align-self: flex-start;
-
-	background: var(--danger);
-	color: var(--text-on-surface);
-}
-.vacation-row button:hover {
-	background: var(--danger-hover);
 }
 </style>
 
@@ -36,7 +30,11 @@
 				</div>
 
 				<div v-if="v.comments">Comments: {{ v.comments }}</div>
-				<button v-if="v.status === 'pending'" @click="remove(v.id)">
+				<button
+					v-if="v.status === 'pending'"
+					@click="remove(v.id)"
+					class="danger-btn"
+				>
 					Delete request
 				</button>
 				<!-- disabled state if request is not pending -->
