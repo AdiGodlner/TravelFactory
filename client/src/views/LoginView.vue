@@ -15,25 +15,26 @@
 				<label for="name" class="label"
 					>Name <span class="required">*</span></label
 				>
+				<span
+					id="name-error"
+					class="error-message"
+					v-if="!!displayNameError"
+					role="alert"
+				>
+					{{ displayNameError }}
+				</span>
 				<input
 					v-model.trim="name"
 					id="name"
 					type="text"
 					placeholder="e.g. bob"
+					:class="{ invalid: !!displayNameError }"
 					required
 					autocomplete="username"
 					:aria-invalid="!!displayNameError"
 					aria-describedby="name-error"
 					@blur="isNameTouched = true"
 				/>
-				<span
-					id="name-error"
-					class="error-message"
-					:class="{ visible: !!displayNameError }"
-					role="alert"
-				>
-					{{ displayNameError }}
-				</span>
 			</div>
 
 			<div class="field">
@@ -44,7 +45,6 @@
 					<option value="requester">Requester</option>
 					<option value="validator">Validator</option>
 				</select>
-				<!-- <small v-if="error.role" class="error">{{}}</small> -->
 			</div>
 
 			<button
@@ -77,7 +77,7 @@ const auth = useAuthStore();
 const router = useRouter();
 // A computed property to decide exactly when to render the error UI
 const displayNameError = computed(() => {
-	// 2. If touched and left blank, show the immediate message
+	// If touched and left blank, show the immediate message
 	if (isNameTouched.value && !name.value.trim()) {
 		return "Name is required.";
 	}

@@ -21,6 +21,11 @@
 	--error-bg: #f8d7da;
 	--error-border: 2px solid #b42318;
 	--error-txt: #721c24;
+	/* success */
+	--success-bg: #d7f8d8;
+	--success-border: 2px solid #18b42f;
+	--success-txt: #1c7223;
+
 	/* required */
 	--required: #b42318;
 
@@ -197,15 +202,6 @@ textarea {
 
 	font-size: var(--font-md);
 }
-
-input:user-invalid,
-select:user-invalid,
-input[aria-invalid="true"] {
-	border: var(--error-border);
-	background-color: var(--error-bg);
-	color: var(--text);
-}
-
 /* focus-visible  */
 
 button:focus-visible,
@@ -262,8 +258,10 @@ textarea:focus-visible {
 }
 
 .label {
-	font-size: var(--font-sm);
-	color: var(--text-muted);
+	font-size: var(--font-md);
+	font-weight: bold;
+	color: var(--text);
+
 	margin-bottom: var(--space-n1);
 }
 
@@ -311,12 +309,29 @@ textarea:focus-visible {
 
 /* general */
 
-.success {
-	color: var(--success);
+.summary {
+	font-size: var(--font-xl);
+	padding: var(--font-xs) var(--font-xl);
+	margin-bottom: var(--space-4);
+	border-radius: var(--radius-sm);
+}
+
+.success-summary {
 	font-size: var(--font-sm);
+	background-color: var(--success-bg);
+	border: var(--success-border);
+	color: var(--success-txt);
 }
 
 /* errors */
+
+/*  styling for invalid filled */
+.invalid {
+	border: var(--error-border);
+	background-color: var(--error-bg);
+	color: var(--text);
+}
+
 .error {
 	color: var(--error-txt);
 	font-size: var(--font-sm);
@@ -325,11 +340,6 @@ textarea:focus-visible {
 .error-message {
 	color: var(--error-txt);
 	font-size: var(--font-sm);
-	display: none;
-}
-
-.error-message.visible {
-	display: block;
 }
 
 /* 4. Form-wide error banner style */
@@ -337,9 +347,6 @@ textarea:focus-visible {
 	background-color: var(--error-bg);
 	border: var(--error-border);
 	color: var(--error-txt);
-	padding: 0.75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 4px;
 }
 
 .required {

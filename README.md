@@ -60,7 +60,7 @@ npm run dev
 
 The server will start on the configured localhost port and print the active address to the console.
 
-### 2. Frontend setup
+### 3. Frontend setup
 
 ```Bash
 cd client
