@@ -17,6 +17,12 @@
 	/* status */
 	--danger: #b42318;
 	--danger-hover: #912018;
+	/* error */
+	--error-bg: #f8d7da;
+	--error-border: 2px solid #b42318;
+	--error-txt: #721c24;
+	/* required */
+	--required: #b42318;
 
 	/* misc */
 	--login-btn: rgba(255, 255, 255, 0.08);
@@ -192,6 +198,14 @@ textarea {
 	font-size: var(--font-md);
 }
 
+input:user-invalid,
+select:user-invalid,
+input[aria-invalid="true"] {
+	border: var(--error-border);
+	background-color: var(--error-bg);
+	color: var(--text);
+}
+
 /* focus-visible  */
 
 button:focus-visible,
@@ -297,12 +311,37 @@ textarea:focus-visible {
 
 /* general */
 
-.error {
-	color: var(--danger);
-	font-size: var(--font-sm);
-}
-
 .success {
 	color: var(--success);
 	font-size: var(--font-sm);
+}
+
+/* errors */
+.error {
+	color: var(--error-txt);
+	font-size: var(--font-sm);
+}
+/* 3. Style error messaging text utility */
+.error-message {
+	color: var(--error-txt);
+	font-size: var(--font-sm);
+	display: none;
+}
+
+.error-message.visible {
+	display: block;
+}
+
+/* 4. Form-wide error banner style */
+.error-summary {
+	background-color: var(--error-bg);
+	border: var(--error-border);
+	color: var(--error-txt);
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border-radius: 4px;
+}
+
+.required {
+	color: var(--required);
 }
