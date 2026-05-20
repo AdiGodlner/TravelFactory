@@ -67,6 +67,10 @@
 		<ul class="vacation-list">
 			<li v-for="v in filteredVacations" :key="v.id" class="vacation-row">
 				<div>
+					<strong> {{ v.user?.name }} </strong>
+				</div>
+
+				<div>
 					<strong> {{ v.startDate }} → {{ v.endDate }} </strong>
 				</div>
 
@@ -132,6 +136,7 @@ async function reject(id: string) {
 }
 
 const filteredVacations = computed(() => {
+	console.log(vacations.value);
 	if (statusFilter.value === "all") {
 		return vacations.value;
 	}

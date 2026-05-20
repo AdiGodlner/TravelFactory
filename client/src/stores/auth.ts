@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import { login as loginApi } from "../api/auth";
 import { useVacationStore } from "./vacations";
 
-type User = {
+export type User = {
 	id: string;
+	name?: string;
 	role: "requester" | "validator";
 };
 

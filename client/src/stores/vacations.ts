@@ -6,6 +6,7 @@ import {
 	getAllVacations,
 	setVacationStatus,
 } from "../api/vacations";
+import type { User } from "./auth";
 export type VacationStatus = "pending" | "approved" | "rejected";
 
 export type Vacation = {
@@ -15,6 +16,7 @@ export type Vacation = {
 	reason?: string;
 	status: VacationStatus;
 	comments?: string;
+	user?: User;
 };
 
 export const useVacationStore = defineStore("vacations", {
