@@ -12,7 +12,7 @@
 	--text-on-surface: #f9fafb;
 
 	/* borders */
-	--border: #d1d5db;
+	--border: 2px solid #727579;
 
 	/* status */
 	--danger: #b42318;
@@ -41,7 +41,7 @@
 	--row-hover: #dceae4;
 
 	/* focus */
-	--focus-ring: #2563eb;
+	--focus-ring: #0b3da9;
 	/* for dark surfaces  */
 	--focus-ring-inverse: #f9fafb;
 	--focus-bg-dark: rgba(249, 250, 251, 0.12);
@@ -123,6 +123,11 @@ h1 {
 	font-size: var(--font-2xl);
 }
 
+legend {
+	font-weight: 600;
+	padding: 0 0.5rem;
+}
+
 /* buttons */
 
 button {
@@ -197,7 +202,7 @@ input,
 select,
 textarea {
 	padding: var(--space-3);
-	border: 1px solid var(--border);
+	border: var(--border);
 	border-radius: var(--radius-md);
 
 	font-size: var(--font-md);
@@ -269,7 +274,7 @@ textarea:focus-visible {
 
 .vacation-list {
 	margin-top: 20px;
-	border: 1px solid var(--border);
+	border: var(--border);
 	border-radius: 8px;
 	overflow: hidden;
 }
@@ -317,7 +322,6 @@ textarea:focus-visible {
 }
 
 .success-summary {
-	font-size: var(--font-sm);
 	background-color: var(--success-bg);
 	border: var(--success-border);
 	color: var(--success-txt);

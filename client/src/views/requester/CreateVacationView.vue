@@ -17,7 +17,7 @@ textarea {
 			aria-live="assertive"
 			class="error-summary summary"
 		>
-			{{ error }}
+			<p>{{ error }}</p>
 		</div>
 		<div
 			v-if="success"

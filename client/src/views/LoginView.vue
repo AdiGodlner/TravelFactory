@@ -4,11 +4,11 @@
 		<!-- 1. Global Alert Area for Form-Wide Errors -->
 		<div
 			v-if="formError"
-			class="error-summary"
+			class="error-summary summary"
 			role="alert"
 			aria-live="assertive"
 		>
-			{{ formError }}
+			<p>{{ formError }}</p>
 		</div>
 		<form @submit.prevent="handleLogin" class="form" novalidate>
 			<div class="field">

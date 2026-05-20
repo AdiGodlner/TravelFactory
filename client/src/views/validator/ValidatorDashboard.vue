@@ -5,6 +5,7 @@
 	display: flex;
 	justify-content: center;
 	gap: var(--space-5);
+	padding: var(--space-6);
 	flex-wrap: wrap;
 	margin-bottom: var(--space-6);
 }
@@ -30,8 +31,8 @@
 <template>
 	<div class="layout-full">
 		<h1>Validator Dashboard</h1>
-
-		<div class="filters">
+		<fieldset class="filters">
+			<legend>Filter vacation requests by status</legend>
 			<label>
 				<input type="radio" value="all" v-model="statusFilter" />
 				All
@@ -51,12 +52,17 @@
 				<input type="radio" value="rejected" v-model="statusFilter" />
 				Rejected
 			</label>
-		</div>
-		<p v-if="loading">Loading...</p>
+		</fieldset>
+		<p v-if="loading" role="status" aria-live="polite">Loading...</p>
 
-		<p v-if="fetchError" class="error">
-			{{ fetchError }}
-		</p>
+		<div
+			v-if="fetchError"
+			role="alert"
+			aria-live="assertive"
+			class="error-summary summary"
+		>
+			<p>{{ fetchError }}</p>
+		</div>
 
 		<ul class="vacation-list">
 			<li v-for="v in filteredVacations" :key="v.id" class="vacation-row">
