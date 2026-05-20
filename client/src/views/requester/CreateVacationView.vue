@@ -11,19 +11,15 @@ textarea {
 <template>
 	<div class="content-narrow layout-center">
 		<h1>Create Vacation Request</h1>
-		<div
-			v-if="error"
-			role="alert"
-			aria-live="assertive"
-			class="error-summary summary"
-		>
+		<div v-if="error" role="alert" class="error-summary summary">
 			<p>{{ error }}</p>
 		</div>
 		<div
 			v-if="success"
 			class="success-summary summary"
 			role="status"
-			aria-live="polite"
+			tabindex="-1"
+			ref="pageStatus"
 		>
 			<p>Vacation request created!</p>
 		</div>
@@ -107,7 +103,7 @@ textarea {
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, nextTick } from "vue";
 import { useVacationStore } from "../../stores/vacations";
 import { getErrorMessage } from "../../utils/error";
 
@@ -115,6 +111,7 @@ const store = useVacationStore();
 
 const startDateRef = ref<HTMLInputElement | null>(null);
 const endDateRef = ref<HTMLInputElement | null>(null);
+const pageStatus = ref<HTMLElement | null>(null);
 
 const isStartDateTouched = ref(false);
 const isEndDateTouched = ref(false);
@@ -235,6 +232,10 @@ async function submit() {
 
 		isEndDateTouched.value = false;
 		isStartDateTouched.value = false;
+		// return focus to the top of the form for convince
+		nextTick(() => {
+			pageStatus.value?.focus();
+		});
 	} catch (err: any) {
 		error.value = getErrorMessage(err, "Failed to create request");
 	} finally {
