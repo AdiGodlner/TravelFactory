@@ -1,6 +1,6 @@
 <style scoped>
 h2 {
-	margin-bottom: var(--space-8);
+	margin-bottom: var(--space-10);
 }
 
 textarea {
@@ -172,9 +172,7 @@ textarea {
 		>
 			<div class="dialog layout-center">
 				<h2 id="reject-title">Reject Vacation Request</h2>
-				<p id="reject-desc">
-					Add a comment explaining why this vacation request is being rejected.
-				</p>
+
 				<div
 					v-if="onRejectServerError"
 					role="alert"
