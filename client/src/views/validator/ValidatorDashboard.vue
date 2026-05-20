@@ -122,7 +122,7 @@ textarea {
 		<div
 			v-if="vacationListUpdated"
 			tabindex="-1"
-			role=""
+			role="status"
 			class="success-summary summary"
 			ref="pageStatus"
 		>
