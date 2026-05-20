@@ -91,7 +91,7 @@ export const useVacationStore = defineStore("vacations", {
 
 			// update local state
 			const index = this.allVacations.findIndex((v) => v.id === id);
-
+			//  TODO fix bug that updated does not return user so user in rejecteed lacks name
 			if (index !== -1) {
 				this.allVacations[index] = updated;
 			}

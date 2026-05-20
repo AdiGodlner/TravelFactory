@@ -13,7 +13,6 @@
 
 	/* borders */
 	--border: 2px solid #727579;
-
 	/* status */
 	--danger: #b42318;
 	--danger-hover: #912018;
@@ -65,7 +64,6 @@
 	--radius-md: 6px;
 	--radius-lg: 10px;
 	--radius-xl: 14px;
-
 	/* spacing */
 	--space-1: 4px;
 	--space-2: 8px;
@@ -135,6 +133,9 @@ button {
 	border: none;
 	background: none;
 
+	min-height: 44px;
+	min-width: 44px;
+	font-weight: bold;
 	padding: var(--space-2) var(--space-3);
 	border-radius: var(--radius-md);
 }
@@ -286,8 +287,6 @@ textarea:focus-visible {
 	gap: 6px;
 
 	padding: 14px 16px;
-
-	transition: background var(--transition-medium);
 }
 .vacation-row:nth-child(even) {
 	background: var(--row-dark);
