@@ -1,3 +1,43 @@
+<template>
+	<nav class="dark-focus-context">
+		<div class="nav-left">
+			<router-link v-if="isRequester" to="/requester">
+				My Vacations
+			</router-link>
+
+			<router-link v-if="isRequester" to="/requester/create">
+				New Request
+			</router-link>
+
+			<router-link v-if="isValidator" to="/validator">
+				Validator Dashboard
+			</router-link>
+		</div>
+		<div class="nav-right">
+			<button v-if="isLoggedIn" @click="handleLogout">Logout</button>
+		</div>
+	</nav>
+</template>
+
+<script setup lang="ts">
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
+
+const auth = useAuthStore();
+const router = useRouter();
+
+const isRequester = computed(() => auth.user?.role === "requester");
+
+const isValidator = computed(() => auth.user?.role === "validator");
+const isLoggedIn = computed(() => !!auth.user);
+
+function handleLogout() {
+	auth.logout();
+	void router.push("/");
+}
+</script>
+
 <style scoped>
 nav {
 	min-height: 60px;
@@ -49,42 +89,3 @@ nav a.router-link-active {
 	transform: scale(1.1);
 }
 </style>
-<template>
-	<nav class="dark-focus-context">
-		<div class="nav-left">
-			<router-link v-if="isRequester" to="/requester">
-				My Vacations
-			</router-link>
-
-			<router-link v-if="isRequester" to="/requester/create">
-				New Request
-			</router-link>
-
-			<router-link v-if="isValidator" to="/validator">
-				Validator Dashboard
-			</router-link>
-		</div>
-		<div class="nav-right">
-			<button v-if="isLoggedIn" @click="handleLogout">Logout</button>
-		</div>
-	</nav>
-</template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-import { useRouter } from "vue-router";
-import { useAuthStore } from "../stores/auth";
-
-const auth = useAuthStore();
-const router = useRouter();
-
-const isRequester = computed(() => auth.user?.role === "requester");
-
-const isValidator = computed(() => auth.user?.role === "validator");
-const isLoggedIn = computed(() => !!auth.user);
-
-function handleLogout() {
-	auth.logout();
-	router.push("/");
-}
-</script>

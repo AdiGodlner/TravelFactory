@@ -10,7 +10,7 @@ export type User = {
 
 export const useAuthStore = defineStore("auth", {
 	state: () => ({
-		token: localStorage.getItem("token") as string | null,
+		token: localStorage.getItem("token"),
 
 		user: JSON.parse(localStorage.getItem("user") || "null") as User | null,
 	}),
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore("auth", {
 			this.user = null;
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
-			// remove user save data from store when logging out
+			// remove user saved data from store when logging out
 
 			const store = useVacationStore();
 			store.$reset();

@@ -1,21 +1,35 @@
 import vue from "eslint-plugin-vue";
-import tseslint from "@typescript-eslint/eslint-plugin";
+import vueParser from "vue-eslint-parser";
+import tseslint from "typescript-eslint";
 import prettier from "eslint-config-prettier";
 
 export default [
 	...vue.configs["flat/recommended"],
+	...tseslint.configs.strictTypeChecked,
 	prettier,
+
 	{
 		files: ["**/*.ts", "**/*.vue"],
+
 		languageOptions: {
-			parser,
+			parser: vueParser,
+
+			parserOptions: {
+				parser: tseslint.parser,
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname,
+				extraFileExtensions: [".vue"],
+			},
 		},
-		plugins: {
-			"@typescript-eslint": tseslint,
-		},
+
 		rules: {
-			"no-unused-vars": "off",
-			"@typescript-eslint/no-unused-vars": "warn",
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{
+					argsIgnorePattern: "^_",
+					varsIgnorePattern: "^_",
+				},
+			],
 		},
 	},
 ];

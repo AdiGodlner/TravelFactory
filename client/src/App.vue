@@ -1,3 +1,19 @@
+<template>
+	<div class="app-shell">
+		<AppNavbar />
+		<main class="main">
+			<router-view />
+		</main>
+		<footer class="footer">
+			<span>this is the end of the page</span>
+		</footer>
+	</div>
+</template>
+
+<script setup lang="ts">
+import AppNavbar from "./components/AppNavbar.vue";
+</script>
+
 <style scoped>
 .app-shell {
 	min-height: 100dvh;
@@ -26,18 +42,3 @@
 	border-top: var(--border);
 }
 </style>
-<template>
-	<div class="app-shell">
-		<AppNavbar />
-		<main class="main">
-			<router-view />
-		</main>
-		<footer class="footer">
-			<span>this is the end of the page</span>
-		</footer>
-	</div>
-</template>
-
-<script setup lang="ts">
-import AppNavbar from "./components/AppNavbar.vue";
-</script>

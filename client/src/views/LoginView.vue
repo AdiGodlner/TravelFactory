@@ -10,22 +10,22 @@
 		>
 			<p>{{ formError }}</p>
 		</div>
-		<form @submit.prevent="handleLogin" class="form" novalidate>
+		<form class="form" novalidate @submit.prevent="handleLogin">
 			<div class="field">
 				<label for="name" class="label"
 					>Name <span class="required">*</span></label
 				>
 				<span
+					v-if="!!displayNameError"
 					id="name-error"
 					class="error-message"
-					v-if="!!displayNameError"
 					role="alert"
 				>
 					{{ displayNameError }}
 				</span>
 				<input
-					v-model.trim="name"
 					id="name"
+					v-model.trim="name"
 					type="text"
 					placeholder="e.g. bob"
 					:class="{ invalid: !!displayNameError }"
@@ -41,7 +41,7 @@
 				<label for="role" class="label"
 					>Role <span class="required">*</span></label
 				>
-				<select v-model="role" id="role" required>
+				<select id="role" v-model="role" required>
 					<option value="requester">Requester</option>
 					<option value="validator">Validator</option>
 				</select>
@@ -100,11 +100,11 @@ async function handleLogin() {
 
 		// redirect based on role
 		if (user.role === "validator") {
-			router.push("/validator");
+			void router.push("/validator");
 		} else {
-			router.push("/requester");
+			void router.push("/requester");
 		}
-	} catch (err: any) {
+	} catch (err: unknown) {
 		formError.value = getErrorMessage(
 			err,
 			"Login failed user exists with a different rolee",

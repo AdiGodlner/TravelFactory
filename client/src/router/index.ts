@@ -45,24 +45,27 @@ const router = createRouter({
 	],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
 	const auth = useAuthStore();
 
 	const requiredRole = to.meta.role;
 
 	// public route
 	if (!requiredRole) {
-		return next();
+		next();
+		return;
 	}
 
 	// not logged in
 	if (!auth.user) {
-		return next("/");
+		next("/");
+		return;
 	}
 
 	// wrong role
 	if (auth.user.role !== requiredRole) {
-		return next(`/${auth.user.role}`);
+		next(`/${auth.user.role}`);
+		return;
 	}
 
 	next();

@@ -1,10 +1,3 @@
-<style scoped>
-.vacation-row button {
-	margin-top: var(--space-3);
-	align-self: flex-start;
-}
-</style>
-
 <template>
 	<div class="layout-full">
 		<h1>My Vacation Requests</h1>
@@ -32,8 +25,8 @@
 				<div v-if="v.comments">Comments: {{ v.comments }}</div>
 				<button
 					v-if="v.status === 'pending'"
-					@click="remove(v.id)"
 					class="danger-btn"
+					@click="remove(v.id)"
 				>
 					Delete request
 				</button>
@@ -64,8 +57,16 @@ onMounted(async () => {
 async function remove(id: string) {
 	try {
 		await store.remove(id);
-	} catch (err: any) {
+	} catch (err: unknown) {
+		// TODO remove alert put proper error message
 		alert(getErrorMessage(err, "Failed to delete vacation"));
 	}
 }
 </script>
+
+<style scoped>
+.vacation-row button {
+	margin-top: var(--space-3);
+	align-self: flex-start;
+}
+</style>

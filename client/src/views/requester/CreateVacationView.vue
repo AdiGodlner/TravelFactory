@@ -1,13 +1,3 @@
-<style scoped>
-.optional {
-	color: var(--text-muted);
-	font-weight: normal;
-}
-textarea {
-	resize: vertical;
-	min-height: 120px;
-}
-</style>
 <template>
 	<div class="content-narrow layout-center">
 		<h1>Create Vacation Request</h1>
@@ -16,32 +6,32 @@ textarea {
 		</div>
 		<div
 			v-if="success"
+			ref="pageStatus"
 			class="success-summary summary"
 			role="status"
 			tabindex="-1"
-			ref="pageStatus"
 		>
 			<p>Vacation request created!</p>
 		</div>
-		<form @submit.prevent="submit" class="form" novalidate>
+		<form class="form" novalidate @submit.prevent="submit">
 			<div class="field">
 				<label class="label" for="start-date"
 					>Start Date <span class="required">*</span>
 				</label>
 				<span
-					role="alert"
-					id="start-date-error"
-					class="error-message"
 					v-if="!!startDateError"
+					id="start-date-error"
+					role="alert"
+					class="error-message"
 				>
 					{{ startDateError }}
 				</span>
 				<input
 					id="start-date"
+					ref="startDateRef"
+					v-model="startDate"
 					type="date"
 					required
-					v-model="startDate"
-					ref="startDateRef"
 					:class="{ invalid: startDateError }"
 					:min="minStartDate"
 					:aria-invalid="!!startDateError"
@@ -55,19 +45,19 @@ textarea {
 					>End Date <span class="required">*</span>
 				</label>
 				<span
-					role="alert"
-					id="end-date-error"
-					class="error-message"
 					v-if="!!endDateError"
+					id="end-date-error"
+					role="alert"
+					class="error-message"
 				>
 					{{ endDateError }}
 				</span>
 				<input
 					id="end-date"
+					ref="endDateRef"
+					v-model="endDate"
 					type="date"
 					required
-					v-model="endDate"
-					ref="endDateRef"
 					:class="{ invalid: endDateError }"
 					:min="minEndDate"
 					:aria-invalid="!!endDateError"
@@ -81,8 +71,8 @@ textarea {
 					>Reason <span class="optional">( Optional )</span>
 				</label>
 				<textarea
-					v-model="reason"
 					id="reason"
+					v-model="reason"
 					aria-describedby="reason-help"
 				></textarea>
 				<small id="reason-help">
@@ -190,7 +180,7 @@ function toLocalDate(date: Date) {
 	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 function toLocalDateString(date: Date) {
-	const year = date.getFullYear();
+	const year = String(date.getFullYear());
 	const month = String(date.getMonth() + 1).padStart(2, "0");
 	const day = String(date.getDate()).padStart(2, "0");
 
@@ -233,13 +223,24 @@ async function submit() {
 		isEndDateTouched.value = false;
 		isStartDateTouched.value = false;
 		// return focus to the top of the form for convince
-		nextTick(() => {
+		void nextTick(() => {
 			pageStatus.value?.focus();
 		});
-	} catch (err: any) {
+	} catch (err: unknown) {
 		error.value = getErrorMessage(err, "Failed to create request");
 	} finally {
 		loading.value = false;
 	}
 }
 </script>
+
+<style scoped>
+.optional {
+	color: var(--text-muted);
+	font-weight: normal;
+}
+textarea {
+	resize: vertical;
+	min-height: 120px;
+}
+</style>
